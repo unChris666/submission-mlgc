@@ -3,6 +3,7 @@ require('dotenv').config();
 const Hapi = require('@hapi/hapi');
 const routes = require('../server/routes');
 const loadModel = require('../services/loadModel');
+const InputError = require('../exceptions/InputError');
  
 (async () => {
     const server = Hapi.server({
@@ -28,7 +29,7 @@ const loadModel = require('../services/loadModel');
                 status: 'fail',
                 message: `${response.message} Silakan gunakan foto lain.`
             })
-            newResponse.code(response.statusCode)
+            newResponse.code(response.output.statusCode)
             return newResponse;
         }
  
@@ -37,7 +38,7 @@ const loadModel = require('../services/loadModel');
                 status: 'fail',
                 message: response.message
             })
-            newResponse.code(response.statusCode)
+            newResponse.code(response.output.statusCode)
             return newResponse;
         }
  
