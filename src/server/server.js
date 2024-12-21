@@ -25,9 +25,9 @@ const InputError = require('../exceptions/InputError');
         if (response instanceof InputError) {
             const newResponse = h.response({
                 status: 'fail',
-                message: `${response.message}`
+                message: response.message
             })
-            newResponse.code(response.output.statusCode)
+            newResponse.code(response.statusCode)
             return newResponse;
         }
         if (response.isBoom) {
